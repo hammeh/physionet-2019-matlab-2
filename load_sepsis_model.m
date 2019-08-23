@@ -4,6 +4,6 @@ function model = load_sepsis_model()
     model.C = C;
 
     % Load the compact ensemble
-    mdl = loadCompactModel('sepsisRUSBoostTree2.mat');
+    mdl = loadCompactModel('sepsisRUSBoostTreeEnsemble.mat');
     model.Mdl = mdl;
 end

@@ -1,5 +1,5 @@
 function [score, label] = get_sepsis_score(data, model)
-    % Fill the data values forwards in time.
+    % Fill the data values forwards in time
     data = fillmissing(data, 'previous');
 
     % Populate extra blood pressure column if only one is missing
@@ -17,7 +17,7 @@ function [score, label] = get_sepsis_score(data, model)
         XTest(:, jCol) = idx;
 
         % Check that any values that are NaN have the missing cluster label
-        XTest(isnan(val), jCol) = size(C, 2) + 1;
+        XTest(isnan(val), jCol) = size(model.C, 2) + 1;
     end
 
     % Get the prediction from the trained model
@@ -27,7 +27,7 @@ function [score, label] = get_sepsis_score(data, model)
     label = scores(:, 2) >= 0.6497;
 
     % RUSBoostedTree scores are not probabilities, so convert to a psuedo probability
-    score = scores(2) / sum(scoresStack);
+    score = scores(2) / sum(scores);
 end
 
 function x = fillBloodPressure(x)
